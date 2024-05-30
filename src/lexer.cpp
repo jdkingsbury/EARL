@@ -31,6 +31,7 @@
 #include "lexer.hpp"
 #include "utils.hpp"
 #include "arena.hpp"
+#include "err.hpp"
 
 Lexer::Lexer() : m_arena(32768) {
   m_hd = nullptr;
@@ -117,6 +118,7 @@ static char *read_file(char *filepath) {
   FILE *f = fopen(filepath, "rb");
 
   if (f == NULL || fseek(f, 0, SEEK_END)) {
+    ERR_WARGS(ErrType::Syntax, "failed to open file %s", filepath);
     return NULL;
   }
 

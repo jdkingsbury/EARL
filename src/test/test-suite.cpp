@@ -1,5 +1,5 @@
-#include "sample/test-sample.hpp"
 #include "test-suite.hpp"
+#include "lexer/test-lexer.hpp"
 
 #include <stdio.h>
 #include <time.h>
@@ -47,5 +47,12 @@ static int global_fail = 0;
 int
 main(void)
 {
+
+  TEST_SUITE(
+    RUN_TEST_GROUP("lexer", {
+      RUN_TEST(test_lexer_next_token());
+    });
+  );
+   
   return 0;
 }
